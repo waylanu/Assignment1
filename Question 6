@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+
+namespace Question_6_Assignment_1
+//Given an array of characters and an integer k
+//Determine whether there are two distinct indices i and j in the array such that arr[i]=arr[j] 
+//and the absolute difference between i and j is at most k.
+{
+    class Program
+    {
+        static void Main(string[] args)
+
+        {
+            // Function to find maximum distance between equal elements
+            static bool ContainsDuplicate(char[] arr, int k)
+            {
+                // Used to store element to first index mapping
+                Dictionary<char, int> map = new Dictionary<char, int>();
+                bool b = false;
+                int min_dist = 0;
+                // Traverse elements and find maximum distance between
+                // same occurrences with the help of map.
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    // If this is first occurrence of element, insert its
+                    // index in map
+                    if (!map.ContainsKey(arr[i]))
+                    {
+                        map.Add(arr[i], i);
+                    }
+                    // Else update max distance
+                    else
+                    {
+                        min_dist = Math.Min(min_dist, i - map[arr[i]]);
+                        if (k >= min_dist)
+                        //if ( k >= i - map[arr[i]])
+                        {
+                            b = true;
+                        }
+                    }
+                }
+                return b;
+            }
+        }
+    }
+}
